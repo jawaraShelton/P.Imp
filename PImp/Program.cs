@@ -24,6 +24,7 @@ namespace PImp
 
             while (!done)
             {
+                Console.WriteLine("");
                 Console.WriteLine("1. Edit Import File Source");
                 Console.WriteLine("2. Edit Import File Destination");
                 Console.WriteLine("3. Import Files from Source");
