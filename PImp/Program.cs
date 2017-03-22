@@ -12,13 +12,42 @@ namespace PImp
     {
         static void Main(string[] args)
         {
+            UI();
+        }
+
+        static void UI()
+        {
             String src = @"N:\Recovered Files\My Photos";
             String dst = @"G:\My Photography";
 
-            PImp(src, dst);
+            Boolean done = false;
 
-            Console.WriteLine("Waiting for you...");
-            Console.ReadLine();
+            while (!done)
+            {
+                Console.WriteLine("1. Edit Import File Source");
+                Console.WriteLine("2. Edit Import File Destination");
+                Console.WriteLine("3. Import Files from Source");
+                Console.WriteLine("");
+                Console.WriteLine("X. Exit Program");
+                Console.WriteLine("");
+
+                switch (Console.ReadLine().ToUpper())
+                {
+                    case "1":
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        PImp(src, dst);
+                        break;
+                    case "X":
+                        done = true;
+                        break;
+                    default:
+                        Console.WriteLine("Option is not valid. Please select from menu.");
+                        break;
+                }
+            }
         }
 
         private static void PImp(String src, String dst)
