@@ -12,48 +12,33 @@ namespace PImp
     {
         static void Main(string[] args)
         {
-            String targetDirectory = @"N:\Unsorted\_Images\New Folder";
-            String[] folders = Directory.GetDirectories(targetDirectory);
+            String src = @"N:\Recovered Files\My Photos";
+            String dst = @"G:\My Photography";
 
-            foreach (string nbcLock in folders)
-                sortImages(nbcLock);
+            PImp(src, dst);
 
-            sortImages(targetDirectory);
             Console.WriteLine("Waiting for you...");
             Console.ReadLine();
         }
 
-        private static void sortImages(String targetDirectory)
+        private static void PImp(String src, String dst)
         {
-            String dest = @"G:\My Photography";
+            String exts = "AVI BMP CR2 DNG GIF JPG MOV MP4 MPO PNG PSD TIF WAV XCF";
+            String[] folders = Directory.GetDirectories(src);
 
-            Console.WriteLine("Reading in the list of files...");
-            String[] files = Directory.GetFiles(targetDirectory);
+            foreach (string nbcLock in folders)
+                PImp(nbcLock, dst);
 
-            Console.WriteLine("Writing out the file list...");
+            Console.WriteLine("Reading in file list for {0}...", src);
+            String[] files = Directory.GetFiles(src);
+
+            Console.WriteLine("Importing Images...");
             foreach (string nbcLock in files)
-                if (
-                    nbcLock.Substring(nbcLock.Length - 3, 3).Equals("CR2")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("AVI")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("dng")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("bmp")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("gif")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("MOV")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("JPG")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("jpg")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("MPO")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("mp4")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("xcf")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("psd") 
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("png")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("tif")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("wav")
-                    || nbcLock.Substring(nbcLock.Length - 3, 3).Equals("WAV")
-                    )
+                if (exts.Contains(nbcLock.Substring(nbcLock.Length - 3, 3).ToUpper()))
                 {
                     DateTime? d = DateTaken(nbcLock);
 
-                    String imageSortFolder = dest + "\\" + d.Value.Year.ToString() + "." + d.Value.Month.ToString("00") + "." + d.Value.Day.ToString("00");
+                    String imageSortFolder = dst + "\\" + d.Value.Year.ToString() + "." + d.Value.Month.ToString("00") + "." + d.Value.Day.ToString("00");
                     if (!Directory.Exists(imageSortFolder))
                         Directory.CreateDirectory(imageSortFolder);
 
@@ -64,9 +49,36 @@ namespace PImp
                     }
                     catch
                     {
-                        // For now if the file exists (or other problem occurs) skip the file.
+                        File.Move(nbcLock, imageSortFolder + "\\" + Renamed(nbcLock));
                     }
                 }
+
+            Console.WriteLine("Checking to see if Folder is now empty...");
+            if (IsEmpty(src))
+            {
+                Console.WriteLine("Folder is empty. Deleting.");
+                Directory.Delete(src);
+            }
+            else
+                Console.WriteLine("Folder is not empty. Leaving alone.");
+        }
+
+        private static String Renamed(String nbcLock)
+        {
+            int fLen = Path.GetFileName(nbcLock).Length;
+            String fExt = Path.GetFileName(nbcLock).Substring(fLen - 3, 3);
+            String fNym = Path.GetFileName(nbcLock).Substring(0, fLen - 5);
+            String fDst = fNym + DateTime.Now.ToString("msf") + "." + fExt;
+
+            return(fDst);
+        }
+
+        private static Boolean IsEmpty(String targetDirectory)
+        {
+            String[] fEmpty = Directory.GetFiles(targetDirectory);
+            String[] dEmpty = Directory.GetDirectories(targetDirectory);
+
+            return((fEmpty.Length + dEmpty.Length) == 0);
         }
 
         public static DateTime? DateTaken(String fNym)
