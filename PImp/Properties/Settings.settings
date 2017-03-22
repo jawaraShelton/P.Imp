@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PImp.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ImageSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">O:\</Value>
+    </Setting>
+    <Setting Name="ImageDestination" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G:\My Photography</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

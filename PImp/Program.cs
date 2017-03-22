@@ -17,13 +17,16 @@ namespace PImp
 
         static void UI()
         {
-            String src = @"N:\Recovered Files\My Photos";
-            String dst = @"G:\My Photography";
-
             Boolean done = false;
 
             while (!done)
             {
+                String src = Properties.Settings.Default.ImageSource;
+                String dst = Properties.Settings.Default.ImageDestination;
+
+                Console.WriteLine("");
+                Console.WriteLine("Importing From: {0}", src);
+                Console.WriteLine("          To  : {0}", dst);
                 Console.WriteLine("");
                 Console.WriteLine("1. Edit Import File Source");
                 Console.WriteLine("2. Edit Import File Destination");
@@ -35,8 +38,14 @@ namespace PImp
                 switch (Console.ReadLine().ToUpper())
                 {
                     case "1":
+                        Console.WriteLine("Enter new Import File Source:");
+                        Properties.Settings.Default.ImageSource = Console.ReadLine();
+                        Properties.Settings.Default.Save();
                         break;
                     case "2":
+                        Console.WriteLine("Enter new Import File Destination:");
+                        Properties.Settings.Default.ImageDestination = Console.ReadLine();
+                        Properties.Settings.Default.Save();
                         break;
                     case "3":
                         PImp(src, dst);
