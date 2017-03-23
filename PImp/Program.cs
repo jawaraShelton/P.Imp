@@ -28,8 +28,8 @@ namespace PImp
                 Console.WriteLine("Importing From: {0}", src);
                 Console.WriteLine("          To  : {0}", dst);
                 Console.WriteLine("");
-                Console.WriteLine("1. Edit Import File Source");
-                Console.WriteLine("2. Edit Import File Destination");
+                Console.WriteLine("1. Change Source");
+                Console.WriteLine("2. Change Destination");
                 Console.WriteLine("3. Import Files from Source");
                 Console.WriteLine("");
                 Console.WriteLine("X. Exit Program");
