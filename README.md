@@ -1,6 +1,6 @@
-"# P.Imp" 
+# P.Imp
 
-P.Imp (P.hoto Imp.orter) is intended to be a bare-bones, command-line utility 
+**P**hoto **Imp**orter (P.Imp) is intended to be a bare-bones, command-line utility 
 designed to import photos from my camera's memory card and organize them into 
 folders according to the date the image was shot.
 
