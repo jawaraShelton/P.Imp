@@ -24,16 +24,26 @@ namespace PImp
                 String src = Properties.Settings.Default.ImageSource;
                 String dst = Properties.Settings.Default.ImageDestination;
 
+                Console.Clear();
+                Console.WriteLine(@"__________ .___                ");
+                Console.WriteLine(@"\______   \|   | _____ ______  ");
+                Console.WriteLine(@" |     ___/|   |/     \\____ \ ");
+                Console.WriteLine(@" |    |    |   |  Y Y  \  |_> >");
+                Console.WriteLine(@" |____| /\ |___|__|_|  /   __/ ");
+                Console.WriteLine(@"        \/           \/|__|    ");
+                Console.WriteLine(" Photo Importer");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Import From: {0}", src);
+                Console.WriteLine("       To  : {0}", dst);
+                Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("");
-                Console.WriteLine("Importing From: {0}", src);
-                Console.WriteLine("          To  : {0}", dst);
+                Console.WriteLine("    [1] Change Source");
+                Console.WriteLine("    [2] Change Destination");
+                Console.WriteLine("    [3] Import Photos");
                 Console.WriteLine("");
-                Console.WriteLine("1. Change Source");
-                Console.WriteLine("2. Change Destination");
-                Console.WriteLine("3. Import Files from Source");
+                Console.WriteLine("    [X] Exit Program");
                 Console.WriteLine("");
-                Console.WriteLine("X. Exit Program");
-                Console.WriteLine("");
+                Console.Write("Enter Selection >[ ");
 
                 switch (Console.ReadLine().ToUpper())
                 {
@@ -54,7 +64,10 @@ namespace PImp
                         done = true;
                         break;
                     default:
+                        Console.WriteLine("");
                         Console.WriteLine("Option is not valid. Please select from menu.");
+                        Console.WriteLine("Press <ENTER> to retry...");
+                        Console.ReadLine();
                         break;
                 }
             }
@@ -114,10 +127,7 @@ namespace PImp
 
         private static Boolean IsEmpty(String targetDirectory)
         {
-            String[] fEmpty = Directory.GetFiles(targetDirectory);
-            String[] dEmpty = Directory.GetDirectories(targetDirectory);
-
-            return((fEmpty.Length + dEmpty.Length) == 0);
+            return((Directory.GetFiles(targetDirectory).Length + Directory.GetDirectories(targetDirectory).Length) == 0);
         }
 
         public static DateTime? DateTaken(String fNym)
