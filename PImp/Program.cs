@@ -25,35 +25,35 @@ namespace PImp
                 String dst = Properties.Settings.Default.ImageDestination;
 
                 Console.Clear();
-                Console.WriteLine(@"__________ .___                ");
-                Console.WriteLine(@"\______   \|   | _____ ______  ");
-                Console.WriteLine(@" |     ___/|   |/     \\____ \ ");
-                Console.WriteLine(@" |    |    |   |  Y Y  \  |_> >");
-                Console.WriteLine(@" |____| /\ |___|__|_|  /   __/ ");
-                Console.WriteLine(@"        \/           \/|__|    ");
-                Console.WriteLine(" Photo Importer");
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("Import From: {0}", src);
-                Console.WriteLine("       To  : {0}", dst);
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("");
-                Console.WriteLine("    [1] Change Source");
-                Console.WriteLine("    [2] Change Destination");
-                Console.WriteLine("    [3] Import Photos");
-                Console.WriteLine("");
-                Console.WriteLine("    [X] Exit Program");
-                Console.WriteLine("");
-                Console.Write("Enter Selection >[ ");
+                Console.WriteLine(@" __________ .___                ");
+                Console.WriteLine(@" \______   \|   | _____ ______  ");
+                Console.WriteLine(@"  |     ___/|   |/     \\____ \ ");
+                Console.WriteLine(@"  |    |    |   |  Y Y  \  |_> >");
+                Console.WriteLine(@"  |____| /\ |___|__|_|  /   __/ ");
+                Console.WriteLine(@"         \/           \/|__|    ");
+                Console.WriteLine("  Photo Importer");
+                Console.WriteLine(" ----------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine(" Import From: {0}", src);
+                Console.WriteLine("        To  : {0}", dst);
+                Console.WriteLine(" ----------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine(" ");
+                Console.WriteLine("     [1] Change Source");
+                Console.WriteLine("     [2] Change Destination");
+                Console.WriteLine("     [3] Import Photos");
+                Console.WriteLine(" ");
+                Console.WriteLine("     [X] Exit P.Imp");
+                Console.WriteLine(" ");
+                Console.Write(" Enter Selection >[ ");
 
                 switch (Console.ReadLine().ToUpper())
                 {
                     case "1":
-                        Console.WriteLine("Enter new Import File Source:");
+                        Console.Write(" New Source? >[ ");
                         Properties.Settings.Default.ImageSource = Console.ReadLine();
                         Properties.Settings.Default.Save();
                         break;
                     case "2":
-                        Console.WriteLine("Enter new Import File Destination:");
+                        Console.Write(" New Destination? >[");
                         Properties.Settings.Default.ImageDestination = Console.ReadLine();
                         Properties.Settings.Default.Save();
                         break;
@@ -65,8 +65,8 @@ namespace PImp
                         break;
                     default:
                         Console.WriteLine("");
-                        Console.WriteLine("Option is not valid. Please select from menu.");
-                        Console.WriteLine("Press <ENTER> to retry...");
+                        Console.WriteLine(" Option is not valid. Please select from menu.");
+                        Console.WriteLine(" Press <ENTER> to retry...");
                         Console.ReadLine();
                         break;
                 }
@@ -94,7 +94,11 @@ namespace PImp
                     if (!Directory.Exists(imageSortFolder))
                         Directory.CreateDirectory(imageSortFolder);
 
-                    Console.WriteLine("{0} => {1}", nbcLock, imageSortFolder + "\\" + Path.GetFileName(nbcLock));
+                    String cOut = (nbcLock + " => " + imageSortFolder + "\\" + Path.GetFileName(nbcLock));
+                    if (cOut.Length > 118)
+                        cOut = cOut.Substring(0, 118);
+
+                    Console.WriteLine("{0}", cOut.PadRight(118 - cOut.Length));
                     try
                     {
                         File.Move(nbcLock, imageSortFolder + "\\" + Path.GetFileName(nbcLock));
