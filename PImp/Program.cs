@@ -21,6 +21,7 @@ namespace PImp
 
             while (!done)
             {
+                String ext = Properties.Settings.Default.ImageExtensions;
                 String src = Properties.Settings.Default.ImageSource;
                 String dst = Properties.Settings.Default.ImageDestination;
 
@@ -34,7 +35,7 @@ namespace PImp
                 Console.WriteLine("  Photo Importer");
                 Console.WriteLine(" ----------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine(" Import From: {0}", src);
-                Console.WriteLine("        To  : {0}", dst);
+                Console.WriteLine("          To: {0}", dst);
                 Console.WriteLine(" ----------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine(" ");
                 Console.WriteLine("     [1] Change Source");
@@ -75,7 +76,7 @@ namespace PImp
 
         private static void PImp(String src, String dst)
         {
-            String exts = "AVI BMP CR2 DNG GIF JPG MOV MP4 MPO PNG PSD TIF WAV XCF";
+            String exts = Properties.Settings.Default.ImageExtensions;
             String[] folders = Directory.GetDirectories(src);
 
             foreach (string nbcLock in folders)
@@ -124,7 +125,7 @@ namespace PImp
             int fLen = Path.GetFileName(nbcLock).Length;
             String fExt = Path.GetFileName(nbcLock).Substring(fLen - 3, 3);
             String fNym = Path.GetFileName(nbcLock).Substring(0, fLen - 5);
-            String fDst = fNym + DateTime.Now.ToString("msf") + "." + fExt;
+            String fDst = fNym + DateTime.Now.ToString("H.mm.ss.ffff") + "." + fExt;
 
             return(fDst);
         }

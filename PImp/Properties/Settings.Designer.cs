@@ -46,5 +46,17 @@ namespace PImp.Properties {
                 this["ImageDestination"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("AVI BMP CR2 DNG GIF JPG MOV MP4 MPO PNG PSD TIF WAV XCF ORF")]
+        public string ImageExtensions {
+            get {
+                return ((string)(this["ImageExtensions"]));
+            }
+            set {
+                this["ImageExtensions"] = value;
+            }
+        }
     }
 }

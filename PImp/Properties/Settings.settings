@@ -8,5 +8,8 @@
     <Setting Name="ImageDestination" Type="System.String" Scope="User">
       <Value Profile="(Default)">G:\My Photography</Value>
     </Setting>
+    <Setting Name="ImageExtensions" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AVI BMP CR2 DNG GIF JPG MOV MP4 MPO PNG PSD TIF WAV XCF ORF</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
